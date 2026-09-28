@@ -1,6 +1,8 @@
 # Magepack 🚀
 
-**Version 2.0.0 of Magepack released, with greater performance results and easier usage!**
+> **This is `synoa-magepack`, a modified version of [Magepack](https://github.com/magesuite/magepack) maintained by [Synoa GmbH](https://www.synoa.de).**
+>
+> The original project has not been maintained since October 2022 and its dependency tree fails `npm audit`. This fork keeps the original behaviour and updates the dependencies (Puppeteer 25, glob 13, commander 14, consola 3, ...) so that the package installs without security advisories. It is not affiliated with, maintained by, or endorsed by creativestyle or MageSuite. All changes are listed in [CHANGELOG.md](CHANGELOG.md); attribution and license details are in [NOTICE.md](NOTICE.md).
 
 Magepack is a bold attempt in making Magento 2 frontend as fast as never before. It builds on experiences gained with [Advanced JavaScript bundling guide](https://devdocs.magento.com/guides/v2.3/performance-best-practices/advanced-js-bundling.html) and [Baler](https://github.com/magento/baler) to provide the best of both worlds - ease of use and superior performance.
 
@@ -19,22 +21,38 @@ _\* All data gathered on clean Magento 2 with sample data installed._
 
 Here are the requirements for Magepack to work:
 
-1. You need Node.js version 10 or higher installed.
+1. You need Node.js version 22.13 or higher installed.
 2. If you are using Magento 2.3.5 or lower, you need to have `mixins.js` module patched [(patch provided and explained here)](https://github.com/magento/baler/issues/23).
 3. If you are using Magento 2.3.3 or lower, you need `jquery.cookie` module shim [(patch provided and explained here)](https://github.com/magento/baler/issues/6).
 4. [Magepack Magento module](https://github.com/magesuite/magepack-magento) installed.
 
-Install with npm:
+Install as a project dependency:
 
 ```
-npm install -g magepack
+npm install --save-dev synoa-magepack
 ```
 
-Install with yarn:
+To use it as a drop-in replacement for the original `magepack` package (same `node_modules/magepack` path, same `magepack` executable), install it under the original name with an npm alias:
 
 ```
-yarn global add magepack
+npm install --save-dev magepack@npm:synoa-magepack@^3.0.0
 ```
+
+Install globally:
+
+```
+npm install -g synoa-magepack
+```
+
+### Puppeteer and Chrome
+
+`magepack generate` drives a headless Chrome through [Puppeteer](https://pptr.dev/), which is an optional dependency of this package. When it is installed, Puppeteer downloads a matching Chrome build into `~/.cache/puppeteer` (about 250 MB). Hosts that only run `magepack bundle` (for example deployment servers) do not need it and can skip the download:
+
+```
+PUPPETEER_SKIP_DOWNLOAD=true npm ci
+```
+
+or install without optional dependencies (`npm ci --omit=optional`). If Chrome is missing when you run `magepack generate`, install it with `npx puppeteer browsers install chrome`.
 
 ## Usage
 
@@ -124,7 +142,7 @@ Now the shop should be way faster then before 🚀 You can (and should) even ena
 
 ## Results
 
-Here are our tests results, testing homepage on local development environment with clean Magento 2.3.4, sample data, all caches enabled and following optimizations:
+Here are the test results of the original project, testing homepage on local development environment with clean Magento 2.3.4, sample data, all caches enabled and following optimizations:
 
 -   JavaScript:
     -   `Merge JavaScript Files` - `Yes`.
@@ -163,14 +181,17 @@ Before rising an issue please follow below guidelines:
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/magesuite/magepack/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/synoa/magepack/tags).
 
 ## License
 
-This project is licensed under the OSL-3.0 license - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the Open Software License version 3.0 (OSL-3.0) - see the [LICENSE.md](LICENSE.md) file for details.
+
+It is a modified version of [Magepack](https://github.com/magesuite/magepack), original work by creativestyle and the Magepack contributors, also licensed under OSL-3.0. Modifications Copyright (c) 2026 Synoa GmbH. See [NOTICE.md](NOTICE.md) for the full attribution notice.
 
 ## Acknowledgments
 
+-   creativestyle and the contributors of the original [Magepack](https://github.com/magesuite/magepack).
 -   Authors of [Advanced JavaScript bundling guide](https://devdocs.magento.com/guides/v2.3/performance-best-practices/advanced-js-bundling.html).
 -   Authors of [Baler](https://github.com/magento/baler/).
 -   Magento Community Engineering Slack.

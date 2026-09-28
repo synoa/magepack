@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`moduleWrapper module wrapNonAmd output matches snapshot 1`] = `
 "define('name', (require.s.contexts._.config.shim['name'] && require.s.contexts._.config.shim['name'].deps || []), function() {
@@ -17,6 +17,6 @@ exports[`moduleWrapper module wrapText output matches snapshot 1`] = `
 
 exports[`moduleWrapper module wrapText output matches snapshot for escaped content 1`] = `
 "define('name', function() {
-    return '<div>\\"Hello\\"</div>';
+    return '<div>"Hello"</div>';
 });"
 `;
