@@ -1,16 +1,26 @@
 name: CI
-on: [ push, pull_request ]
+on: [push, pull_request]
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
+    build:
+        runs-on: ubuntu-latest
+        env:
+            PUPPETEER_SKIP_DOWNLOAD: 'true'
+        steps:
+            - uses: actions/checkout@v4
 
-    - name: Install modules
-      run: yarn install --non-interactive --ignore-optional
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: npm
 
-    - name: Run ESLint
-      run: yarn run eslint . --report-unused-disable-directives
+            - name: Install modules
+              run: npm ci
 
-    - name: Run Jest
-      run: yarn run jest
+            - name: Run ESLint
+              run: npm run lint -- --report-unused-disable-directives
+
+            - name: Run Jest
+              run: npm test
+
+            - name: Audit production dependencies
+              run: npm audit --omit=dev

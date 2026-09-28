@@ -1,6 +1,13 @@
 #!/usr/bin/env node
 
-const program = require('commander');
+/**
+ * synoa-magepack - a modified version of Magepack (https://github.com/magesuite/magepack),
+ * original work by creativestyle, licensed under the Open Software License version 3.0.
+ * Modifications Copyright (c) 2026 Synoa GmbH, licensed under the Open Software License
+ * version 3.0. See NOTICE.md and LICENSE.md.
+ */
+
+const { program } = require('commander');
 const logger = require('./lib/utils/logger');
 const version = require('./package.json').version;
 const errorHandler = function (error) {
@@ -13,7 +20,7 @@ program.name('magepack').usage('[generate|bundle] <options...>');
 program
     .version(version, '-v, --version', 'Output the current version.')
     .helpOption('-h, --help', 'Show this command summary.')
-    .addHelpCommand(false);
+    .helpCommand(false);
 
 program
     .command('generate')

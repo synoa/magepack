@@ -1,74 +1,79 @@
 {
-    "name": "magepack",
-    "version": "2.11.2",
-    "bin": "./cli.js",
-    "repository": "https://github.com/magesuite/magepack.git",
-    "author": "creativestyle",
-    "license": "OSL-2.0",
-    "main": "index.js",
-    "scripts": {
-        "test": "jest"
+    "name": "synoa-magepack",
+    "version": "3.0.0",
+    "description": "Advanced JavaScript bundling for Magento 2. Maintained fork of magesuite/magepack with up-to-date dependencies.",
+    "keywords": [
+        "magento",
+        "magento2",
+        "javascript",
+        "bundling",
+        "requirejs",
+        "magepack"
+    ],
+    "homepage": "https://github.com/synoa/magepack#readme",
+    "bugs": "https://github.com/synoa/magepack/issues",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/synoa/magepack.git"
     },
+    "author": "Synoa GmbH",
+    "contributors": [
+        "creativestyle (https://github.com/magesuite/magepack) - original author of Magepack"
+    ],
+    "license": "OSL-3.0",
+    "main": "index.js",
+    "bin": {
+        "magepack": "./cli.js"
+    },
+    "files": [
+        "cli.js",
+        "index.js",
+        "lib/",
+        "!lib/**/*.test.js",
+        "!lib/**/__snapshots__/",
+        "magepack.config.sample.js",
+        "NOTICE.md",
+        "CHANGELOG.md"
+    ],
     "engines": {
-        "node": ">=10"
+        "node": ">=22.13.0"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "test": "jest",
+        "lint": "eslint .",
+        "format": "prettier --write .",
+        "prepublishOnly": "npm run lint && npm test"
     },
     "dependencies": {
-        "commander": "^5.0.0",
-        "consola": "^2.11.3",
+        "commander": "^14.0.3",
+        "consola": "^3.4.2",
         "generate-sourcemap": "^0.0.2",
-        "glob": "^7.1.6",
-        "gzip-size": "^5.1.1",
-        "javascript-stringify": "^2.0.1",
-        "jsesc": "^3.0.1",
+        "glob": "^13.0.6",
+        "gzip-size": "^6.0.0",
+        "javascript-stringify": "^2.1.0",
+        "jsesc": "^3.1.0",
         "lodash.merge": "^4.6.2",
-        "terser": "^5.15.0"
+        "terser": "^5.51.2"
     },
-    "lint-staged": {
-        "*.json": [
-            "prettier --write"
-        ],
-        "*.js": [
-            "prettier --write",
-            "eslint --fix"
-        ]
+    "optionalDependencies": {
+        "puppeteer": "^25.12.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "eslint": "^10.11.0",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-prettier": "^5.5.6",
+        "globals": "^17.12.0",
+        "jest": "^30.5.2",
+        "prettier": "^3.9.9"
     },
     "prettier": {
         "singleQuote": true,
         "trailingComma": "es5",
         "bracketSpacing": true,
         "tabWidth": 4
-    },
-    "eslintConfig": {
-        "env": {
-            "node": true,
-            "es6": true,
-            "browser": true,
-            "jest": true
-        },
-        "extends": [
-            "eslint:recommended",
-            "prettier",
-            "plugin:prettier/recommended"
-        ],
-        "parserOptions": {
-            "ecmaVersion": 8
-        }
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "devDependencies": {
-        "eslint": "^6.8.0",
-        "eslint-config-prettier": "^6.10.1",
-        "eslint-plugin-prettier": "^3.1.2",
-        "husky": "^4.2.3",
-        "jest": "^26.1.0",
-        "lint-staged": "^10.1.0",
-        "prettier": "^2.0.2"
-    },
-    "optionalDependencies": {
-        "puppeteer": "^2.1.1"
     }
 }
